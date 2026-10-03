@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>钢包出钢直角弯头砖 — 炸裂失效诊断与 4% 单斜氧化锆抗热震评估</title>
+<!-- ===== 微信 / 社交分享卡片 ===== -->
+<meta name="description" content="钢包出钢直角弯头砖炸裂失效诊断：4% 单斜氧化锆（5μm）对热震起裂几乎无益（S₁ 反而降 3%），真正主因是残水蒸汽爆裂与入钢砖温过低。附可交互配方工艺计算器。">
+<meta name="author" content="耐火材料工艺分析">
+<meta name="format-detection" content="telephone=no,email=no,address=no">
+<meta name="theme-color" content="#0b5f8a">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="耐火材料工艺分析">
+<meta property="og:title" content="钢包出钢直角弯头砖炸裂诊断 · 4% 单斜氧化锆评估">
+<meta property="og:description" content="结论：4% 单斜 ZrO₂ 提升损伤容限 +13%，但抗裂 S₁ 反而降 3%；主因是残水蒸汽爆裂与入钢砖温过低。">
+<meta property="og:url" content="https://uyfhowuhieiw.github.io/refractory-elbow-a7k2m9/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="钢包出钢直角弯头砖炸裂诊断 · 4% 单斜氧化锆评估">
+<meta name="twitter:description" content="4% 单斜 ZrO₂ 抗裂几乎无益（S₁ −3%）、损伤容限 +13%；主因是残水蒸汽爆裂与入钢砖温过低。">
+<!-- ===== 分享卡片结束 ===== -->
+
+<style>
+  :root{
+    --ink:#141b26; --ink2:#3d4a5c; --ink3:#6b7a90;
+    --bg:#f4f6f9; --card:#ffffff; --line:#dfe5ee; --line2:#eef2f7;
+    --acc:#0b5f8a; --acc2:#0e7fa8; --accsoft:#eaf4f9;
+    --warn:#b45309; --warnbg:#fff8ec; --bad:#a52020; --badbg:#fdf0ef;
+    --ok:#1c6b45; --okbg:#eef8f2; --zr:#7c3aed;
+    --mono:"JetBrains Mono","Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    font-feature-settings:"tnum";
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 96px}
+  /* ---------- header ---------- */
+  header.top{
+    background:linear-gradient(135deg,#0b3550 0%,#0b5f8a 55%,#0e7fa8 100%);
+    color:#fff;padding:46px 0 40px;margin-bottom:30px;
+    box-shadow:0 10px 34px rgba(9,40,62,.22);
+  }
+  header.top .wrap{padding-bottom:0}
+  .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.82;font-weight:600}
+  header.top h1{font-size:31px;line-height:1.32;margin:12px 0 10px;font-weight:700;letter-spacing:.01em}
+  header.top p.sub{margin:0;font-size:15.5px;opacity:.9;max-width:780px}
+  .metaline{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .metaline span{
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+    border-radius:999px;padding:5px 13px;font-size:13px
+  }
+  /* ---------- verdict banner ---------- */
+  .verdict{
+    background:var(--card);border:1px solid var(--line);border-left:6px solid var(--warn);
+    border-radius:14px;padding:24px 26px;margin-bottom:30px;
+    box-shadow:0 3px 14px rgba(20,27,38,.05)
+  }
+  .verdict h2{margin:0 0 6px;font-size:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:.03em}
+  .tag.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f2d9b0}
+  .tag.ok{background:var(--okbg);color:var(--ok);border:1px solid #c3e2d1}
+  .tag.bad{background:var(--badbg);color:var(--bad);border:1px solid #f0c9c6}
+  .tag.info{background:var(--accsoft);color:var(--acc);border:1px solid #c6e0ee}
+  .verdict .lead{font-size:16.5px;color:var(--ink2);margin:8px 0 0}
+  .verdict .lead b{color:var(--ink)}
+  /* ---------- sections ---------- */
+  section{margin-bottom:34px;scroll-margin-top:14px}
+  h2.sec{
+    font-size:22px;margin:0 0 16px;padding-bottom:11px;border-bottom:2px solid var(--line);
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap
+  }
+  h2.sec .n{
+    font:700 13px/1 var(--mono);color:#fff;background:var(--acc);
+    border-radius:7px;padding:6px 9px;letter-spacing:.04em
+  }
+  h3.sub{font-size:17px;margin:24px 0 10px;color:var(--ink)}
+  h4.sub2{font-size:15px;margin:18px 0 8px;color:var(--acc);letter-spacing:.02em}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:22px 24px;box-shadow:0 2px 10px rgba(20,27,38,.04)}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(235px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+  /* ---------- stats ---------- */
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 17px}
+  .stat .lab{font-size:12.5px;color:var(--ink3);letter-spacing:.02em}
+  .stat .val{font:700 25px/1.25 var(--mono);color:var(--acc);margin-top:5px;letter-spacing:-.01em}
+  .stat .val small{font-size:13px;color:var(--ink3);font-weight:600;font-family:inherit}
+  .stat .note{font-size:12.5px;color:var(--ink3);margin-top:3px}
+  .stat.zr .val{color:var(--zr)}
+  .stat.bad .val{color:var(--bad)}
+  /* ---------- tables ---------- */
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:440px}
+  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+  thead th{background:#f7f9fc;color:var(--ink2);font-size:12.5px;font-weight:700;letter-spacing:.03em;white-space:nowrap;border-bottom:1px solid var(--line)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#fafcfe}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-size:13.3px;overflow-wrap:anywhere}
+  .up{color:var(--bad);font-weight:700}
+  .dn{color:var(--ok);font-weight:700}
+  .flat{color:var(--ink3)}
+  code{font-family:var(--mono);font-size:.88em;background:#f1f4f8;border:1px solid var(--line2);border-radius:5px;padding:1px 5px}
+  .formula{font-family:var(--mono);font-size:13px;line-height:1.85;background:#f7f9fc;border-left:3px solid var(--acc2);border-radius:0 8px 8px 0;padding:12px 15px;margin:12px 0 14px -24px;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink2)}
+  @media (max-width:780px){ .formula{margin-left:0} }
+  ul.tight li,ol.tight li{margin:5px 0}
+  ul.tight,ol.tight{padding-left:22px;margin:10px 0}
+  /* ---------- callouts ---------- */
+  .cal{border-radius:11px;padding:15px 18px;margin:16px 0;border:1px solid;font-size:15px}
+  .cal b{display:block;margin-bottom:3px;font-size:14.5px;letter-spacing:.01em}
+  .cal.warn{background:var(--warnbg);border-color:#f0dcbb;color:#6d4208}
+  .cal.bad{background:var(--badbg);border-color:#f0c9c6;color:#7d1c1c}
+  .cal.ok{background:var(--okbg);border-color:#c3e2d1;color:#14563a}
+  .cal.info{background:var(--accsoft);border-color:#c6e0ee;color:#0a4763}
+  /* ---------- mechanism list ---------- */
+  .mech{display:grid;gap:14px}
+  .m{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;position:relative;padding-left:74px}
+  .m .rank{position:absolute;left:18px;top:18px;width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font:700 18px/1 var(--mono);color:#fff}
+  .m.a1 .rank{background:#a52020}.m.a2 .rank{background:#c2600f}
+  .m.a3 .rank{background:#b45309}.m.a4 .rank{background:#0e7fa8}.m.a5 .rank{background:#6b7a90}
+  .m h4{margin:0 0 4px;font-size:16.5px}
+  .m .share{font-size:12.5px;color:var(--ink3);font-family:var(--mono);margin-bottom:7px}
+  .m p{margin:6px 0;font-size:14.6px;color:var(--ink2)}
+  .m .fix{font-size:14.4px;color:var(--ok);background:var(--okbg);border-radius:8px;padding:9px 12px;margin-top:9px;display:block}
+  /* ---------- sliders ---------- */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:22px 24px}
+  .ctrl{margin-bottom:15px}
+  .ctrl .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px;gap:10px}
+  .ctrl .lab b{font-family:var(--mono);color:var(--acc);font-size:14.5px}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:99px;background:#e3e9f1;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:19px;height:19px;border-radius:50%;background:var(--acc2);border:3px solid #fff;box-shadow:0 1px 5px rgba(11,95,138,.5);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--acc2);border:3px solid #fff;cursor:pointer}
+  input[type=range].zr{background:linear-gradient(90deg,#ddd6fe,#e3e9f1)}
+  input[type=range].zr::-webkit-slider-thumb{background:var(--zr);box-shadow:0 1px 5px rgba(124,58,237,.5)}
+  .btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
+  button{font:600 13.5px/1 inherit;padding:9px 15px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer;transition:.14s}
+  button:hover{border-color:var(--acc2);color:var(--acc);background:var(--accsoft)}
+  button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  /* ---------- bar compare ---------- */
+  .bars{margin-top:6px}
+  .bar{margin:11px 0}
+  .bar .bl{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:4px;gap:12px}
+  .bar .bl b{font-family:var(--mono);font-size:13.8px}
+  .track{height:11px;background:#eef2f7;border-radius:99px;overflow:hidden}
+  .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#0e7fa8,#0b5f8a);transition:width .22s ease}
+  .fill.zr{background:linear-gradient(90deg,#a78bfa,#7c3aed)}
+  .fill.badfill{background:linear-gradient(90deg,#e08a86,#a52020)}
+  .delta{font-family:var(--mono);font-size:12.8px;font-weight:700}
+  /* ---------- curve ---------- */
+  .curvebox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 10px 8px;overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink2);padding:8px 12px 2px}
+  .legend i{display:inline-block;width:20px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  /* ---------- misc ---------- */
+  details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 18px;margin:11px 0}
+  details summary{cursor:pointer;font-weight:600;font-size:15px;color:var(--acc);list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"▸ ";font-size:13px}
+  details[open] summary::before{content:"▾ "}
+  details[open] summary{margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--line2)}
+  .foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink3)}
+  .chip{display:inline-block;font:600 12px/1.6 var(--mono);background:#f1f4f8;border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin:2px 3px 2px 0;color:var(--ink2)}
+  .hl{background:linear-gradient(180deg,transparent 58%,#ffe9a8 58%);font-weight:600}
+  @media (max-width:620px){
+    header.top h1{font-size:24px}
+    .wrap{padding:0 15px 70px}
+    .m{padding-left:20px;padding-top:64px}
+    .m .rank{top:15px}
+    .card,.panel{padding:17px 16px}
+    h2.sec{font-size:19px}
+  }
+  @media print{
+    body{background:#fff}
+    header.top{background:#0b3550 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section{break-inside:avoid}
+    .card,.panel,.m,.tw{box-shadow:none}
+  }
+
+  /* ============ 微信与手机端覆盖（置于末尾以确保生效）============ */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{overflow-wrap:break-word;word-break:break-word}
+  img,svg{max-width:100%}
+  .tw{max-width:100%}
+
+  .share-card{background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:20px 22px;margin:34px 0 24px;box-shadow:0 2px 10px rgba(20,27,38,.04)}
+  .share-card h3{margin:0 0 4px;font-size:17px;color:var(--acc)}
+  .share-card .sub{font-size:13.5px;color:var(--ink3);margin:0 0 15px}
+  .share-flex{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+  .qr{width:148px;height:148px;flex:0 0 148px;border:1px solid var(--line);
+    border-radius:10px;background:#fff;padding:7px}
+  .share-meta{flex:1 1 240px;min-width:210px}
+  .url-box{font-family:var(--mono);font-size:12.3px;line-height:1.6;word-break:break-all;
+    background:#f7f9fc;border:1px solid var(--line);border-radius:9px;padding:10px 12px;
+    color:var(--acc);user-select:all}
+  .share-meta ol{margin:12px 0 0;padding-left:19px;font-size:14px;color:var(--ink2)}
+  .share-meta ol li{margin:4px 0}
+
+  @media (max-width:640px){
+    body{font-size:15.5px;line-height:1.78}
+    p{margin:9px 0}
+
+    header.top{padding:30px 0 26px;margin-bottom:20px}
+    .kicker{font-size:11px;letter-spacing:.12em}
+    header.top h1{font-size:21px;line-height:1.42}
+    header.top p.sub{font-size:14px;line-height:1.7}
+    .metaline{margin-top:15px;gap:6px}
+    .metaline span{font-size:12px;padding:4px 10px}
+
+    .wrap{padding:0 14px 56px;max-width:100%}
+    section{margin-bottom:26px}
+    h2.sec{font-size:18px;gap:9px;padding-bottom:9px}
+    h2.sec .n{font-size:11.5px;padding:5px 7px}
+    h3.sub{font-size:16px;margin:20px 0 9px}
+    h4.sub2{font-size:14.5px}
+
+    .card{padding:16px 15px;border-radius:11px}
+    .panel{padding:16px 15px;border-radius:11px}
+    .verdict{padding:18px 15px;border-radius:11px;border-left-width:5px}
+    .verdict h2{font-size:17.5px}
+    .verdict .lead{font-size:15px}
+    .verdict ol.tight{font-size:15px;padding-left:19px}
+    .grid{gap:12px}
+    .g2,.g3,.g4{grid-template-columns:1fr}
+    .stat{padding:13px 14px}
+    .stat .val{font-size:22px}
+
+    .mech{gap:11px}
+    .m{padding:15px 14px 15px 15px;padding-top:70px}
+    .m .rank{left:14px;top:13px;width:38px;height:38px;font-size:16px;border-radius:10px}
+    .m h4{font-size:15.5px}
+    .m p{font-size:14.2px}
+    .m .fix{font-size:14.2px;padding:9px 11px}
+    .m .share{font-size:11.8px}
+    .m ul.tight{font-size:14.2px;padding-left:19px}
+
+    .formula{font-size:11.6px;line-height:1.7;padding:10px 11px;margin:11px 0 13px;
+      margin-left:0;overflow-x:auto;white-space:pre}
+
+    .cal{padding:13px 14px;font-size:14.4px;border-radius:10px}
+    .cal b{font-size:14px}
+
+    .tw table{font-size:12.8px;min-width:0}
+    .tw th,.tw td{padding:7px 8px}
+    .tw thead th{font-size:11.4px;white-space:normal}
+    .tw td.num,.tw th.num{font-size:12.2px}
+
+    .btnrow{gap:7px;margin-bottom:15px}
+    button{font-size:13px;padding:10px 13px;flex:1 1 auto}
+    input[type=range]::-webkit-slider-thumb{width:23px;height:23px}
+    input[type=range]::-moz-range-thumb{width:23px;height:23px}
+    .ctrl{margin-bottom:14px}
+    .ctrl .lab{font-size:13.5px}
+    .ctrl .lab b{font-size:13.8px}
+    .bar{margin:10px 0}
+    .bar .bl{font-size:12.8px;flex-wrap:wrap;gap:3px}
+    .bar .bl b{font-size:12.8px}
+    .track{height:10px}
+
+    .curvebox{padding:10px 6px 4px}
+    .legend{font-size:12.2px;gap:8px;padding:8px 6px 2px;display:block}
+    .legend span{display:block;margin:3px 0}
+
+    details{padding:12px 14px}
+    details summary{font-size:14.2px}
+    details ul.tight{font-size:13.8px;padding-left:19px}
+    .foot{font-size:12.3px;margin-top:32px}
+    .chip{font-size:11.4px}
+    .hl{background:linear-gradient(180deg,transparent 62%,#ffe9a8 62%)}
+
+    .share-card{padding:17px 15px;margin:26px 0 18px}
+    .share-card h3{font-size:16px}
+    .share-flex{gap:14px;justify-content:center}
+    .qr{width:134px;height:134px;flex:0 0 134px}
+    .share-meta{flex:1 1 100%;min-width:0}
+    .url-box{font-size:11.4px}
+  }
+
+  @media (max-width:400px){
+    header.top h1{font-size:19px;line-height:1.4}
+    body{font-size:15px}
+    .stat .val{font-size:20px}
+    .tw table{font-size:12.2px}
+    .tw th,.tw td{padding:6px 7px}
+    .formula{font-size:11px}
+  }
+  /* ============ 覆盖结束 ============ */
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">Refractory Failure Analysis · Ladle Nozzle Elbow</div>
+    <h1>钢包出钢直角弯头砖<br>炸裂失效诊断与 4% 单斜氧化锆微粉抗热震评估</h1>
+    <p class="sub">针对“磷酸二氢铝结合白刚玉–铬刚玉体系、机压成型、800 ℃ 中温烧成、1100–1200 ℃ 大火烘烤后盛装 1700 ℃ 钢水”的直角弯头砖（内孔 φ120 mm、壁厚 80 mm、外形四方体），逐项核算其炸裂主因，并判断外加 4% 单斜 ZrO₂（5 μm）是否真正有益。</p>
+    <div class="metaline">
+      <span>内孔 φ120 mm</span><span>壁厚 80 mm</span><span>外形四方体</span>
+      <span>单重 ≈ 23 kg</span><span>使用温度 1700 ℃</span><span>结合剂 磷酸二氢铝 3.6%</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ============ 结论 ============ -->
+<div class="verdict">
+  <h2>总体结论 <span class="tag warn">抗裂几乎无益</span><span class="tag info">损伤容限 +13%</span><span class="tag bad">不是主药</span></h2>
+  <p class="lead">
+    4% 单斜氧化锆（5 μm）<b>对“抗热震起裂”几乎无益，对“抗炸裂”更不是主药</b>。按第 03 节模型核算，它给热震阻力参数 <b>R</b> 只带来 <b class="hl">+2.1%</b> 的提升，却使线膨胀系数上升 <b>+0.3%</b>、导热系数下降 <b>27%</b>（表面升温更快）；两者相抵，<b>入钢瞬间的强度安全系数 S₁ 反而略降约 3%</b>。它真正明显改善的是<b>抗热震损伤参数 R′′′′（+13%）</b>——即“裂了之后能否止住”，属于损伤容限，而非抗裂能力。此外它还引入 5 μm 单斜相在 ~1170 ℃ 附近的 <b>4–5% 马氏体体积效应</b>，而你的大火烘烤温度恰好落在这一区间的边缘。真正决定这块砖“炸不炸”的，是另外三件事：
+  </p>
+  <ol class="tight" style="margin-top:12px;font-size:15.5px;color:var(--ink2)">
+    <li><b>残水蒸汽爆裂（主因）</b>。80 mm 厚坯体若残水 0.3%，内部可产生约 <b>7 L 水蒸气</b>，而坯体可供排气的孔隙空间仅约 <b>1.15 L</b>。排气不尽就是“内部憋压—崩裂”，与热震无关，加锆也救不了。</li>
+    <li><b>入钢瞬间砖温太低</b>。通道表面温度骤升 <b>428 K</b>、表层热应力约 <b>19 MPa</b>，而该温度下有效抗拉强度只有 <b>1.6 MPa</b>（800 ℃ 烧成），<b>S₁ ≈ 0.09</b>。把砖温从 1100 ℃ 提到 1400 ℃，ΔT<sub>表面</sub> 从 428 K 降到 214 K，热应力由 19 MPa 降到 <b>6 MPa</b>。</li>
+    <li><b>800 ℃ 烧成偏低</b>。磷酸二氢铝在 800 ℃ 仅缩合为偏磷酸铝 <code>Al(PO₃)₃</code>，尚未转化为更稳定的 <code>AlPO₄</code>；高温有效强度只有 1200 ℃ 烧成的 <b>1/3</b>（1.6 → 4.2 MPa）。提到 1200 ℃ 可让 <b>S₁ 由 0.09 升到 0.22、S₂ 由 0.31 升到 0.82</b>。</li>
+  </ol>
+  <p class="lead" style="margin-top:14px">
+    <b>建议方案：</b>ZrO₂ 可以保留，但由 4% 降到 <b>2.5–3%</b> 并改用 <b>D50 1–2 μm</b>（可另配 1% 粗颗粒做级配），同时 <b>Cr₂O₃ 由 3% 降到 2%</b>、加 <b>1% 活性 α-Al₂O₃ 微粉</b>强化磷酸盐基质、加 <b>0.05–0.1% 聚丙烯纤维</b>做排气通道、<b>3.6% 结合剂稀释至密度 1.35–1.40</b>。但请把预算与精力优先投给“彻底烘干 + 烧成提到 1200 ℃ + 分级烘烤并热态入钢”这三条。
+  </p>
+</div>
+
+<!-- ============ 0 设计条件 ============ -->
+<section id="s0">
+  <h2 class="sec"><span class="n">00</span>设计与工况条件核算</h2>
+  <div class="grid g4">
+    <div class="stat"><div class="lab">单砖净体积</div><div class="val">7.01<small> L</small></div><div class="note">已扣除 φ120 内孔</div></div>
+    <div class="stat"><div class="lab">单砖质量</div><div class="val">23.0<small> kg</small></div><div class="note">按体积密度 3.28 g/cm³</div></div>
+    <div class="stat"><div class="lab">实体体积分数</div><div class="val">81.7<small> %</small></div><div class="note">对应显气孔率 ≈ 15–18%</div></div>
+    <div class="stat bad"><div class="lab">可供排气的孔隙</div><div class="val">1.15<small> L</small></div><div class="note">水蒸气无处可去的极限</div></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">几何与热工特征</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>项目</th><th class="num">数值</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>内孔等效直径</td><td class="num">120 mm</td><td>出钢通道</td></tr>
+            <tr><td>转弯前后壁厚</td><td class="num">80 mm</td><td>名义壁厚</td></tr>
+            <tr><td>内角最厚截面</td><td class="num">≈158 mm</td><td>“厚肉区”，热惯性最大</td></tr>
+            <tr><td>外表面积 / 体积</td><td class="num">0.129 mm⁻¹</td><td>905 cm² / 7010 cm³</td></tr>
+            <tr><td>特征尺寸（半壁厚）</td><td class="num">40 mm</td><td>Biot 数计算用</td></tr>
+            <tr><td>内孔表面积占比</td><td class="num">≈45 %</td><td>受钢流冲刷的主力面</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cal info"><b>为什么弯头比直筒砖更容易炸</b>直角弯头的内角是“三向受约束的厚肉区”，转弯外侧是“薄壁区”。升温与膨胀时两者变形不同步，内角承受剪切与弯曲约束应力；而机压成型的坯体存在明显的<span class="hl">压制方向性</span>——平行于压制方向与垂直方向的强度可差 30% 以上，内孔表面恰好落在拉应力与大缺陷重合的位置，于是裂纹从内孔壁起、沿孔轴剥落，这就是典型的“炸裂”形貌。</div>
+    </div>
+
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">配方归一化核算（干基 100%）</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>组分</th><th class="num">配比</th><th class="num">密度 g/cm³</th><th class="num">体积 %</th></tr></thead>
+          <tbody>
+            <tr><td>白刚玉 3–1 mm（骨料）</td><td class="num">30 %</td><td class="num">3.95</td><td class="num">8.7</td></tr>
+            <tr><td>白刚玉 1–0 mm（骨料）</td><td class="num">27 %</td><td class="num">3.95</td><td class="num">7.9</td></tr>
+            <tr><td>白刚玉 ≤0.074 mm（细粉）</td><td class="num">30 %</td><td class="num">3.95</td><td class="num">8.7</td></tr>
+            <tr><td>氧化铬微粉 Cr₂O₃</td><td class="num">3 %</td><td class="num">5.21</td><td class="num">0.7</td></tr>
+            <tr><td>外加 T-325 目（按需）</td><td class="num">10 %</td><td class="num">3.95</td><td class="num">2.9</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);margin-top:12px">
+        矿相理论密度 <span class="chip">ρ_th ≈ 4.02 g/cm³</span>；实际机压坯体 <span class="chip">ρ_b ≈ 3.20–3.35 g/cm³</span>，对应 <b>显气孔率 15–18%</b>（对受 1700 ℃ 钢水冲刷的部件偏高，见第 02 节）。
+      </p>
+      <div class="cal warn" style="margin-bottom:0"><b>骨料级配偏细</b>3–1 mm 仅 30%，而 1–0 mm 占 27%。粗骨料偏少会同时带来两个坏处：抗热震所需的“粗颗粒钉扎—微裂纹偏转”机制不足；以及细粉总量偏高（原料细粉 30% + 外加 10% ≈ 40%），需液量上升，坯体残水风险加大。建议调整为 <b>3–1 mm 34% / 1–0 mm 24% / ≤0.074 mm 32% + 外加 T-325 10%</b>（合计 100%），即所谓的“两头大、中间小”。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 热量与水分 ============ -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>一块砖里到底有多少水？——爆裂的物质基础</h2>
+  <p>这是全篇最关键的一段核算。磷酸二氢铝结合体系的水有三个来源，它们排出的温度区间不同，一旦在厚壁内部“赶不上进度”，就会以蒸汽形式憋在砖里。</p>
+
+  <div class="grid g3">
+    <div class="stat"><div class="lab">① 结合剂带入的游离水</div><div class="val">≈130<small> g</small></div><div class="note">3.6% × 23 kg，密度 1.5 约含 50% 水</div></div>
+    <div class="stat"><div class="lab">② 磷酸盐缩合结构水</div><div class="val">≈16<small> g</small></div><div class="note">Al(H₂PO₄)₃ → Al(PO₃)₃ + 3H₂O</div></div>
+    <div class="stat"><div class="lab">③ 干燥后残余水分</div><div class="val">0.1–2.3<small> %</small></div><div class="note">残水 0.3% 即 69 g</div></div>
+  </div>
+
+  <div class="formula">1 g H₂O → 1244 L 水蒸气（标态）；0.3% 残水 = 69 g → 86 L 标态蒸汽
+在 600 ℃、密闭孔隙中：n = 69000/18 = 3833 mol，V = 1.15 L
+p = nRT/V = 3833 × 8.314 × 873 / 1.15×10⁻³ ≈ 2.4×10¹⁰ Pa（远超强度，必然崩裂）</div>
+
+  <div class="cal bad"><b>结论：蒸汽压力不是“可能超限”，而是“必然超限”</b>只要排气通道不通，残水在 200–600 ℃ 区间产生的蒸汽压力可以轻松达到几十 MPa，而该砖 800 ℃ 烧成后的常温抗折强度仅 8–15 MPa、抗拉强度仅约 <b>4 MPa</b>；到 1100 ℃ 使用温度，有效抗拉强度更只剩 <b>1.6 MPa</b>。这就是为什么炸裂往往发生在<span class="hl">中低温段（300–700 ℃）</span>而不是到 1700 ℃ 之后——如果你的现场开裂正是发生在升温途中，那基本可以确诊为蒸汽爆裂，而不是热震。</div>
+
+  <h3 class="sub">蒸汽能否排出，取决于升温速率</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>升温速率（200–600 ℃ 区间）</th><th>中心到表面的排气时间</th><th>内部峰值蒸汽压（估算）</th><th class="num">失效风险</th></tr></thead>
+      <tbody>
+        <tr><td>&gt; 50 ℃/h（大火直冲）</td><td>来不及排出</td><td>&gt; 20 MPa</td><td class="num up">几乎必然炸裂</td></tr>
+        <tr><td>20–30 ℃/h</td><td>勉强</td><td>≈ 8–15 MPa</td><td class="num up">高</td></tr>
+        <tr><td>10 ℃/h + 分段保温</td><td>可排出</td><td>≈ 2–5 MPa</td><td class="num flat">中，需配合</td></tr>
+        <tr><td>≤ 5 ℃/h + 350 ℃ / 600 ℃ 各保温 4 h</td><td>充分排出</td><td>&lt; 1 MPa</td><td class="num dn">安全</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--ink3);margin-top:9px">注：上表为按一维扩散与理想气体方程的量级估算，用于比较不同工艺的相对风险，不作为设计依据。</p>
+
+  <div class="cal ok" style="margin-bottom:0"><b>这一条能做到，等于解决了大半问题</b>把“长时间低中温烘烤”从经验说法变成量化工艺：室温→110 ℃ 用 12–24 h，110 ℃ 保温 24–48 h，110→200 ℃ 用 5 ℃/h，200 ℃ 保温 12 h，200→350 ℃ 用 3 ℃/h，350 ℃ 保温 8 h，350→600 ℃ 用 5–8 ℃/h，600 ℃ 保温 4 h。<b>入窑前坯体残水必须 &lt; 0.2%</b>，用称重法或水分仪逐块验证，不能凭手感。</div>
+</section>
+
+<!-- ============ 02 五大机理 ============ -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>炸裂机理排序：谁是真凶，谁是帮凶</h2>
+  <p>下面按实际贡献度排序。这个排序很重要，因为它直接决定“4% 氧化锆”值不值得加——如果主因是 01 号机理，那么无论加多少氧化锆都只是隔靴搔痒。</p>
+
+  <div class="mech">
+    <div class="m a1">
+      <div class="rank">1</div>
+      <h4>残水 / 结合水蒸汽爆裂（Moisture Explosion）</h4>
+      <div class="share">贡献度 ≈ 45–60 % ｜ 发生时段：升温 200–700 ℃</div>
+      <p>机理见第 01 节。厚壁 + 低透气性 + 磷酸盐结合体系放出多级水分，是这类砖最经典、最容易复现的炸裂原因。特征形貌：<b>从内孔或厚肉中心崩出、断口新鲜呈放射状、无釉化变色</b>。</p>
+      <p>现场鉴别：同批砖若在 300–700 ℃ 就开裂，或烘烤时能听到闷响，则本项即为真凶。</p>
+      <span class="fix">✔ 对策：分级慢速烘干 + 350/600 ℃ 保温 + 残水 &lt;0.2% + 加 0.05–0.1% 聚丙烯纤维（150 ℃ 熔融形成排气微通道）+ 模具抽真空或双向压制降低密度梯度。</span>
+    </div>
+
+    <div class="m a2">
+      <div class="rank">2</div>
+      <h4>入钢瞬间的热震起裂 + 循环疲劳（Thermal Shock &amp; Fatigue）</h4>
+      <div class="share">贡献度 ≈ 20–30 % ｜ 发生时段：入钢后 0–10 min</div>
+      <p>按第 03 节计算：砖温 1100 ℃ 时通道表面温度骤升 <b>428 K</b>，表层拉应力约 <b>19 MPa</b>，而该温度下有效抗拉强度仅 <b>1.6 MPa</b>，<b>S₁ ≈ 0.09</b>。判定带恰好处在“会裂与不裂”的临界位置，所以现场表现为<span class="hl">“有时裂、有时不裂”</span>——这正是临界状态材料的典型失效特征（强度、缺陷尺寸、密度梯度逐块波动，钢流是否偏冲内角也在变）。</p>
+      <p>注：材料本体的经典判据 R = σ_f(1−ν)/(E₀·α) 高达 4.3×10³ K，看着“极其抗热震”，但那是纯弹性薄件的理想值，对 80 mm 厚壁砖没有意义；厚壁的真实控制量是<b>壁内实际温差与由此产生的约束应力</b>。</p>
+      <span class="fix">✔ 对策：① 入钢前砖温提到 ≥1400 ℃（ΔT<sub>表面</sub> 由 428 K 降到 214 K，热应力由 19 MPa 降到 6 MPa，S₁ 由 0.09 升到 0.20）；② 烧成提到 1200 ℃（S₁ → 0.22）；③ 两者同时做（S₁ → 0.51、S₂ → 0.94）；④ 钢流不直冲内角。</span>
+    </div>
+
+    <div class="m a3">
+      <div class="rank">3</div>
+      <h4>磷酸盐结合相失强与再水化（Bond Degradation）</h4>
+      <div class="share">贡献度 ≈ 10–15 % ｜ 长期隐性</div>
+      <p>磷酸二氢铝的热演化路径：<code>Al(H₂PO₄)₃ →(250 ℃) AlH₂P₃O₁₀ →(650–800 ℃) Al(PO₃)₃ →(&gt;1000 ℃) AlPO₄</code>。</p>
+      <ul class="tight" style="font-size:14.6px;color:var(--ink2)">
+        <li>800 ℃ 烧成后主相是 <b>偏磷酸铝 Al(PO₃)₃</b>，<b>仍具水溶性/吸湿性</b>；</li>
+        <li>存放或处于潮湿钢包环境时<b>重新吸水</b>，常温强度可下降 30–50%；</li>
+        <li>再次受热时这部分“回吸的水”又变成蒸汽源，与机理 1 叠加；</li>
+        <li>同时磷酸盐基质本身在 &gt;1000 ℃ 开始软化，1700 ℃ 下几乎不提供结合强度。</li>
+      </ul>
+      <span class="fix">✔ 对策：把烧成提到 1050–1200 ℃ 促其转化为 AlPO₄；加 1% 活性 α-Al₂O₃ 微粉让基质形成更耐热的 Al₂O₃–AlPO₄ 复合结合；成品石蜡封孔 / 油浸 / 真空防潮包装；控制库存周期。</span>
+    </div>
+
+    <div class="m a4">
+      <div class="rank">4</div>
+      <h4>氧化铬带来的烧结—模量代价（Cr₂O₃ Penalty）</h4>
+      <div class="share">贡献度 ≈ 5–10 % ｜ 直接削弱抗热震</div>
+      <p>Cr₂O₃ 与 Al₂O₃ 形成连续固溶体，促进烧结、提高抗渣性，但代价是：</p>
+      <ul class="tight" style="font-size:14.6px;color:var(--ink2)">
+        <li>Cr₂O₃ 的 α（9.6）与 E（280 GPa 量级）都高于 Al₂O₃，<b>置换 Al₂O₃ 后使整体模量与固溶强化程度上升</b>，同样温差下热应力更大、弹性能储存更多；</li>
+        <li>强促烧结、<b>降低气孔率</b>——而气孔与微裂纹本来是对抗热震的有利因素（它们降低 E、打断裂纹）；</li>
+        <li>Cr₂O₃ 自身弹性模量与硬度高，在热震过程中不易通过微裂纹耗能；</li>
+        <li>强还原气氛下 Cr₂O₃ 可被还原，并在氧化气氛高温下挥发（Cr⁶⁺ 环境风险），影响炉衬寿命与作业环境。</li>
+        <li><b>本模型的诚实说明：</b>按 Reuss 等应力下限混合，3% 与 2% Cr₂O₃ 算出的 α 差别仅约 0.1%（因为 Cr₂O₃ 密度 5.21 远高于 Al₂O₃ 的 3.95，质量分数换算成体积分数后占比很小）。所以 Cr₂O₃ 的负面作用主要体现在<b>模量与烧结致密化</b>上，而不在膨胀系数上——这一点请以第 06 节的实测 α 与 E 为准。</li>
+      </ul>
+      <span class="fix">✔ 对策：若该砖不需要承担抗渣任务（出钢通道以抗热震与抗冲刷为主），建议 Cr₂O₃ 降至 <b>2%</b>（不承担抗渣时可到 1–1.5%）；把省下的模量额度让给 ZrO₂ 的增韧收益，实现“置换而非叠加”。</span>
+    </div>
+
+    <div class="m a5">
+      <div class="rank">5</div>
+      <h4>机压坯体的密度梯度与压制方向性（Forming Anisotropy）</h4>
+      <div class="share">贡献度 ≈ 5 % ｜ 决定“为什么坏在这一块”</div>
+      <p>单面加压时，靠近模冲一侧密度高、远端密度低，密度差可达 0.1–0.2 g/cm³，强度差 30% 以上。直角弯头的内角本就是模具填充死角，容易出现低密度区与层裂（脱模时的弹性后效裂纹），这些缺陷在热应力下成为起裂源。</p>
+      <span class="fix">✔ 对策：双向压制或先预压后终压；模壁润滑；真空/抽气排气；控制加压速率分 3–4 级；脱模后逐块做“敲击听音”与体积密度抽检。</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 热震核算 ============ -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>热震烈度定量核算与 4% ZrO₂ 的影响</h2>
+
+  <h3 class="sub">3.1 入钢瞬间到底有多猛</h3>
+  <div class="grid g2">
+    <div>
+      <div class="formula">【材料本体参数】（含 16% 气孔，800 ℃ 烧成）
+α(20–1200 ℃) ≈ 9.50 ×10⁻⁶ /K
+E₀（常温有效模量）≈ 78 GPa      λ ≈ 18.8 W/(m·K)
+σ_f（常温抗拉）≈ 4.2 MPa       ν = 0.22
+R = σ_f(1−ν)/(E₀·α) ≈ 4.3×10³ K ← 纯弹性判据：因该砖 E 低、λ 高，R 数值很“好看”，
+                                   但对 80 mm 厚壁毫无意义，必须按壁内实际温差算
+
+【入钢时的表面温度骤升】砖温 1100 ℃ → 钢水 1700 ℃
+h ≈ 500 W/(m²·K)（钢水接触）   L = 半壁厚 0.040 m   t = 10 min
+Bi = hL/λ ≈ 1.46
+δ = √(π·a·t)，a = λ/(ρ·cp) ≈ 4.19×10⁻⁷ m²/s → δ ≈ 28 mm
+ΔT_表面 = ΔT·[1 − exp(x²)·erfc(x)]，x = hδ/λ ≈ 1.47 → ΔT_表面 ≈ 428 K
+
+【表层热应力】σ = ½·E·α·ΔT_表面 × k_relax（k_relax = 0.5）
+砖温 1100 ℃：E ≈ 18.4 GPa，σ_f,高温 ≈ 1.6 MPa → σ ≈ 19 MPa
+砖温 1400 ℃：E ≈ 12.4 GPa，σ_f,高温 ≈ 1.2 MPa → σ ≈  6 MPa</div>
+      <div class="cal bad" style="margin-top:0"><b>S = σ_f,高温 / σ_热 ≈ 0.09 —— 处在“会裂与不裂”的临界带上</b>入钢瞬间的 ΔT<sub>表面</sub> 高达 <span class="hl">428 K</span>，产生的表层拉应力约 <b>19 MPa</b>，而该温度下有效抗拉强度只有 <b>1.6 MPa</b>（800 ℃ 烧成）。所谓“抗热震”，本质上是<span class="hl">靠牺牲表面层、靠微裂纹耗能、靠外层受压区夹住裂纹</span>来活下来的。因此任何能增加断裂功、增加微裂纹耗散、降低弹性模量的手段（这正是 ZrO₂ 的作用）都有益——但它的量级远小于“把砖温从 1100 ℃ 提到 1400 ℃”这种工艺改动。</div>
+    </div>
+    <div>
+      <h4 class="sub2">关键结论：温度越高越好，不是越低越安全</h4>
+      <div class="formula">砖温 ↑ → ① ΔT_表面 变小（直接减小热应力）
+        ② 磷酸盐结合相软化 → E 下降（模量折减）
+        ③ 有效强度同时下降，但应力降得更快
+
+   砖温     kT(软化)   E        σ_热   σ_f,高温   S
+   300 ℃    0.69     53.6 GPa  128 MPa  3.3 MPa  0.03
+   800 ℃    0.35     27.5 GPa   —       2.1 MPa   —
+  1100 ℃    0.24     18.4 GPa   19 MPa  1.6 MPa  0.09
+  1200 ℃    0.21     16.1 GPa   —       1.5 MPa   —
+  1400 ℃    0.16     12.4 GPa    6 MPa  1.2 MPa  0.20
+  1500 ℃    0.14     11.0 GPa    4 MPa  —        0.31（配 1200 ℃ 烧成达 0.80）</div>
+      <p style="font-size:14.6px;color:var(--ink2)"><b>入钢的头 10 分钟是最危险的窗口</b>：通道表面温度骤升，表面受压、其下约 28 mm 深度内受拉。这也说明——<span class="hl">提高砖温比任何添加剂都划算</span>，从 1100 ℃ 提到 1400 ℃，ΔT<sub>表面</sub> 减半、热应力降到 1/3。</p>
+    </div>
+  </div>
+
+  <h3 class="sub">3.2 热震阻力参数：加锆前后对比</h3>
+  <div class="formula">R   = σ_f(1−ν)/(E·α)        第一热应力断裂抵抗参数（临界温差）
+R'''' = E·γ_wof/(σ_f²(1−ν))    抗热震损伤参数（裂纹扩展阻力，越大越好）
+R_st  = (λ·σ_f(1−ν))/(E·α)   第二热应力抵抗参数（考虑导热）</div>
+
+  <div class="panel">
+    <div class="btnrow" style="margin-bottom:18px">
+      <button id="btnA" class="on" data-zr="0">基准配方（0% ZrO₂）</button>
+      <button id="btnB" data-zr="4">加 4% 单斜 ZrO₂</button>
+    </div>
+
+    <div class="grid g2">
+      <div>
+        <div class="ctrl">
+          <div class="lab"><span>单斜 ZrO₂ 外加量</span><b><span id="vZr">4.0</span> %</b></div>
+          <input type="range" id="sZr" class="zr" min="0" max="8" step="0.5" value="4">
+        </div>
+        <div class="ctrl">
+          <div class="lab"><span>Cr₂O₃ 微粉含量</span><b><span id="vCr">3.0</span> %</b></div>
+          <input type="range" id="sCr" min="0" max="6" step="0.5" value="3">
+        </div>
+        <div class="ctrl">
+          <div class="lab"><span>显气孔率（成型控制）</span><b><span id="vPo">16</span> %</b></div>
+          <input type="range" id="sPo" min="10" max="24" step="1" value="16">
+        </div>
+        <div class="ctrl">
+          <div class="lab"><span>烧成温度（决定 σ_f）</span><b><span id="vTs">800</span> ℃</b></div>
+          <input type="range" id="sTs" min="800" max="1300" step="50" value="800">
+        </div>
+        <div class="ctrl" style="margin-bottom:4px">
+          <div class="lab"><span>入钢前砖温（决定 ΔT）</span><b><span id="vTi">1100</span> ℃</b></div>
+          <input type="range" id="sTi" min="300" max="1300" step="50" value="1100">
+        </div>
+      </div>
+
+      <div>
+        <div class="bars">
+          <div class="bar">
+            <div class="bl"><span>线膨胀系数 α</span><b><span id="oA">9.50</span> ×10⁻⁶/K <span class="delta" id="dA"></span></b></div>
+            <div class="track"><div class="fill badfill" id="fA" style="width:60%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span>导热系数 λ</span><b><span id="oL">4.50</span> W/(m·K) <span class="delta" id="dL"></span></b></div>
+            <div class="track"><div class="fill" id="fL" style="width:60%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span>弹性模量 E（按砖温软化后）</span><b><span id="oE">18.4</span> GPa <span class="delta" id="dE"></span></b></div>
+            <div class="track"><div class="fill badfill" id="fE" style="width:60%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span>高温有效抗拉强度 σ<sub>f</sub></span><b><span id="oSf">1.60</span> MPa</b></div>
+            <div class="track"><div class="fill" id="fSf" style="width:30%"></div></div>
+          </div>
+          <div class="bar" style="margin-top:18px">
+            <div class="bl"><span><b>R</b> 临界温差（经典抗热震判据）</span><b><span id="oR">4438</span> K <span class="delta" id="dR"></span></b></div>
+            <div class="track" style="height:14px"><div class="fill zr" id="fR" style="width:55%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span><b>R''''</b> 抗热震损伤参数（相对值）</span><b><span id="oR4">1.00</span> <span class="delta" id="dR4"></span></b></div>
+            <div class="track" style="height:14px"><div class="fill zr" id="fR4" style="width:55%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span>入钢表层热应力 σ<sub>热</sub>（10 min 内）</span><b><span id="oSig">19</span> MPa</b></div>
+            <div class="track"><div class="fill badfill" id="fSig" style="width:35%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span><b>判据 ①</b> S<sub>入钢</sub> = σ<sub>f,高温</sub>/σ<sub>热</sub>（≥1 不裂）</span><b><span id="oS">0.06</span> <span class="delta" id="dS"></span></b></div>
+            <div class="track" style="height:14px"><div class="fill badfill" id="fS" style="width:35%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bl"><span><b>判据 ②</b> S<sub>稳态</sub> = σ<sub>f,高温</sub>/σ<sub>壁厚温差</sub>（≥1 安全）</span><b><span id="oSw">0.23</span></b></div>
+            <div class="track" style="height:14px"><div class="fill" id="fSw" style="width:50%"></div></div>
+          </div>
+        </div>
+        <div class="cal info" id="verdictBox" style="margin-bottom:0"></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">3.3 计算依据（材料参数与标定）</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>组分（致密矿相）</th><th class="num">α (20–1200 ℃) ×10⁻⁶/K</th><th class="num">E (GPa)</th><th class="num">λ (W/m·K)</th><th class="num">ρ_th (g/cm³)</th></tr></thead>
+      <tbody>
+        <tr><td>白刚玉 Al₂O₃</td><td class="num">9.5</td><td class="num">380</td><td class="num">30.0</td><td class="num">3.95</td></tr>
+        <tr><td>氧化铬 Cr₂O₃</td><td class="num">9.6</td><td class="num">280</td><td class="num">12.0</td><td class="num">5.21</td></tr>
+        <tr><td>单斜氧化锆 m-ZrO₂</td><td class="num">10.5</td><td class="num">200</td><td class="num">2.0</td><td class="num">5.68</td></tr>
+        <tr><td colspan="5" style="background:#f7f9fc;font-size:13px;color:var(--ink3)">
+          <b>复合与折减模型：</b>固相按 Reuss 等应力下限混合 → 气孔与晶界折减：<br>
+          α = α_s·(1 − 0.40(P − 0.16))；E₀ = E_s·(1−P)(1 − 1.9P + 0.9P²)·0.35；λ = λ_s·(1−P)^1.5·0.84；σ_f = σ₀(T)·exp(−4P)<br>
+          <b>标定点（P = 16%、800 ℃ 烧成）：</b>α = 9.50×10⁻⁶/K、E₀ = 78 GPa、λ = 18.8 W/(m·K)、σ_f = 4.2 MPa<br>
+          <b>高温软化：</b>kT = exp(−(T−20)/750)，E = E₀·kT，σ_f,高温 = σ_f·kT^0.67<br>
+          <b>σ₀(T)（零气孔抗拉强度）：</b>800 ℃→8.0、1050 ℃→15.0、1200 ℃→21.0、1300 ℃→24.0 MPa<br>
+          <b>说明：</b>E₀ = 78 GPa 与 λ = 18.8 W/(m·K) 均取该类铬刚玉–磷酸盐结合耐火材料的实测上限，属<span class="hl">对砖有利</span>的取值；即便如此，判据①仍不足 1，说明该砖确实工作在临界状态。
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cal warn"><b>读数要点（请亲手拖一下滑块）</b>把“单斜 ZrO₂”从 0 拖到 8%，你会看到 <b>R 只从 4346 K 涨到 4500 K 左右（+3～4%）</b>，而 <b>S₁（判据①）反而基本不动甚至略降</b>（因为 λ 下降使表面升温更快）；<br>
+  但把“入钢前砖温”从 1100 ℃ 拖到 1400 ℃，<b>S₁ 从 0.09 跳到 0.20</b>；再把“烧成温度”从 800 ℃ 拖到 1200 ℃，<b>S₁ 到 0.51、S₂ 到 0.94</b>。<span class="hl">工艺滑块的杠杆是添加剂滑块的十倍以上</span>——这就是本报告最想让读者记住的一句话。</div>
+</section>
+
+<!-- ============ 04 ZrO2 利弊 ============ -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>4% 单斜氧化锆（5 μm）：收益与风险逐项拆解</h2>
+
+  <div class="grid g2">
+    <div class="card" style="border-top:4px solid var(--ok)">
+      <h3 class="sub" style="margin-top:0;color:var(--ok)">✔ 有益的一面</h3>
+      <ul class="tight" style="font-size:14.8px;color:var(--ink2)">
+        <li><b>损伤容限明显改善（这是它最大的贡献）。</b>微裂纹与 t→m 相变耗能，使抗热震损伤参数 <b>R′′′′ 提高约 13%</b>——裂了之后不容易一路扩展成贯穿性大裂口，剥落会变成“小块、逐层”而不是“整块崩掉”。</li>
+        <li><b>t→m 相变增韧。</b>使用中部分 m-ZrO₂ 在高温转变为四方相 t-ZrO₂，被 Al₂O₃ 基体约束保持到室温；裂纹尖端应力场诱发 t→m 相变，吸收能量并产生压应力屏蔽，<b>断裂韧性可提升 10–25%</b>，这正对应上面 R′′′′ 的提升。</li>
+        <li><b>略降弹性模量。</b>ZrO₂ 的 E（200 GPa）低于 Al₂O₃（380 GPa），4% 外加使常温模量由 79.7 降到 <b>77.8 GPa（−2.4%）</b>，方向正确但幅度很小。</li>
+        <li><b>抗渣与抗侵蚀辅助作用。</b>ZrO₂ 对碱性渣、FeO 侵蚀有一定抵抗能力，可延长弯头寿命。</li>
+        <li><b>成本可控。</b>4% 外加、按 23 kg/块计约 0.9 kg/块，原料成本增加有限。</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-top:4px solid var(--bad)">
+      <h3 class="sub" style="margin-top:0;color:var(--bad)">✘ 有害 / 需警惕的一面</h3>
+      <ul class="tight" style="font-size:14.8px;color:var(--ink2)">
+        <li><b>导热系数大幅下降 27%（最被忽视的负面）。</b>ZrO₂ 的 λ 仅 2.0 W/(m·K)，4% 外加使整体 λ 由 <b>18.8 降到 13.7 W/(m·K)</b>。后果是：入钢时通道表面的升温速率反而<b>快 5.5%</b>，ΔT<sub>表面</sub> 由 405 K 升到 428 K。<span class="hl">两项相抵后，入钢瞬间的强度安全系数 S₁ 从 0.063 降到 0.061，反而变差约 3%</span>——这是很多人凭直觉想不到的结果。</li>
+        <li><b>膨胀系数略升。</b>m-ZrO₂ 的 α ≈ 10.5 ×10⁻⁶/K 高于 Al₂O₃ 的 9.5，4% 外加使整体 α 由 9.502 升到 <b>9.529 ×10⁻⁶/K（+0.3%）</b>，方向与抗热震需求相反（幅度小，可接受）。</li>
+        <li><b>1170 ℃ 附近的马氏体体积效应。</b>升温时 m→t 收缩约 4–5%（体积），降温时逆转变为 m 又膨胀 4–5%。这个相变温度<span class="hl">恰好落在你 1100–1200 ℃ 的大火烘烤区间的下沿</span>。砖在 1100–1200 ℃ 长时间往复，等于让 ZrO₂ 颗粒反复“呼吸”，在 80 mm 厚壁的强约束下产生局部微裂纹与应力集中；对一块已经存在缺陷的厚壁砖，这可能是“压垮骆驼的最后一根稻草”。</li>
+        <li><b>强度与体积密度下降。</b>微裂纹与相变膨胀抵消部分烧结收缩，含 4% ZrO₂ 的试样强度通常比不含的低 5–15%，抗折强度下降会同时恶化 R 与 S₁。</li>
+        <li><b>与磷酸盐结合相的相容性存疑。</b>ZrO₂ 在含磷酸盐体系中有生成磷酸锆（ZrP₂O₇ / Zr(HPO₄)₂）的倾向，可能<b>消耗结合剂</b>；同时 m-ZrO₂ 表面易吸附羟基/水分，会加剧吸湿与“回吸—再蒸发”的爆裂风险。</li>
+        <li><b>5 μm 粒径的选择不够优。</b>微裂纹增韧要求颗粒与基体热膨胀失配产生的应力场达到临界尺寸；对 Al₂O₃ 基体，<b>1–2 μm 的 ZrO₂ 增韧效率通常优于 5 μm</b>，且 5 μm 颗粒本身易成为缺陷源。若要“微裂纹+钉扎”双重机制，更合理的是<b>1–2 μm 为主 + 少量 30–45 μm 粗粒做级配</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cal warn" style="margin-top:16px"><b>一句话总结这一节</b>4% m-ZrO₂ 的净效果是<b>“抗裂不变甚至略差、抗裂后扩展明显改善”</b>：R（抗起裂）+2.1%、S₁（强度安全系数）−3%、R′′′′（抗损伤）+13%。当前失效的控制环节是“蒸汽压是否超限”（第 01 节）与“起裂那一瞬间”（第 03 节判据①），而 ZrO₂ 恰恰对这两者帮助最小。把 4% 降到 <b>2.5–3%</b>、粒径细化为 <b>1–2 μm</b>、并把 Cr₂O₃ 从 3% 降到 2%（置换而非叠加），可以在保留损伤容限收益的同时，避免膨胀系数与相变应力的叠加恶化。</div>
+</section>
+
+<!-- ============ 05 推荐方案 ============ -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>推荐配方与工艺卡</h2>
+
+  <h3 class="sub">5.1 两套配方对比（干基）</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>组分</th><th class="num">现配方</th><th class="num">推荐方案</th><th>调整理由</th></tr></thead>
+      <tbody>
+        <tr><td>白刚玉 3–1 mm</td><td class="num">30 %</td><td class="num">34 %</td><td>增加粗骨料，提供裂纹偏转与钉扎</td></tr>
+        <tr><td>白刚玉 1–0 mm</td><td class="num">27 %</td><td class="num">24 %</td><td>“两头大中间小”级配</td></tr>
+        <tr><td>白刚玉 ≤0.074 mm</td><td class="num">30 %</td><td class="num">30 %</td><td>保持基质填充</td></tr>
+        <tr><td>氧化铬 Cr₂O₃ 微粉</td><td class="num">3 %</td><td class="num">2 %</td><td>降低 α 与 E，为 ZrO₂ 让出额度</td></tr>
+        <tr><td><b>单斜 ZrO₂ 微粉</b></td><td class="num">—</td><td class="num">3 %</td><td>D50 1–2 μm；相变+微裂纹增韧</td></tr>
+        <tr><td>活性 α-Al₂O₃ 微粉</td><td class="num">—</td><td class="num">1 %</td><td>强化磷酸盐基质，补偿高温失强</td></tr>
+        <tr><td>外加 T-325 目</td><td class="num">10 %</td><td class="num">10 %</td><td>成型润滑与致密化</td></tr>
+        <tr><td>磷酸二氢铝溶液</td><td class="num">3.6 %（ρ1.5）</td><td class="num">3.6 %（ρ1.35–1.40）</td><td>稀释降黏、减少带入游离水；总水量下降</td></tr>
+        <tr><td>聚丙烯纤维</td><td class="num">—</td><td class="num">0.05–0.1 %</td><td>3–6 mm，150 ℃ 熔融造排气通道</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">5.2 成型与干燥</h3>
+  <ul class="tight" style="font-size:15px;color:var(--ink2)">
+    <li>混料：骨料先干混 2 min → 加 2/3 液料混 3 min → 加细粉与微粉混 4 min → 补加余下液料混 2 min；<b>困料 30 min</b> 后成型。混合料水分控制 2.2–2.8%。</li>
+    <li>成型：<b>双向压制</b>或先预压后终压，分 3–4 级升压至 150–200 MPa；模壁润滑；尽量抽真空排气。</li>
+    <li>坯体指标：体积密度 ≥ 3.05 g/cm³，显气孔率 ≤ 17%，<b>同一块砖上下密度差 ≤ 0.05 g/cm³</b>。</li>
+    <li>养护：25–35 ℃、湿度 &lt;60% 自然养护 24 h 后入干燥窑。</li>
+    <li>干燥曲线见下表——<b>这条曲线是整个工艺里最不能省的部分</b>。</li>
+  </ul>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>阶段</th><th class="num">温度区间</th><th class="num">升温速率</th><th class="num">保温时间</th><th>目的</th></tr></thead>
+      <tbody>
+        <tr><td>自然养护</td><td class="num">25–35 ℃</td><td class="num">—</td><td class="num">24 h</td><td>磷酸盐初步硬化</td></tr>
+        <tr><td>脱水 I</td><td class="num">室温→110 ℃</td><td class="num">5–8 ℃/h</td><td class="num">24–48 h</td><td>排出游离水（最关键）</td></tr>
+        <tr><td>脱水 II</td><td class="num">110→200 ℃</td><td class="num">5 ℃/h</td><td class="num">12 h</td><td>排出残余游离水</td></tr>
+        <tr><td>脱水 III</td><td class="num">200→350 ℃</td><td class="num">3 ℃/h</td><td class="num">8 h</td><td>磷酸盐缩合起始、结构水释放</td></tr>
+        <tr><td>脱水 IV</td><td class="num">350→600 ℃</td><td class="num">5–8 ℃/h</td><td class="num">4 h</td><td>结构水完全排出</td></tr>
+        <tr><td colspan="5" style="background:#eef8f2;color:#14563a;font-size:13.5px"><b>入窑前逐块检测残余水分 &lt; 0.2%（合格线）</b>，超标砖一律退回重新干燥，不得进入高温窑。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">5.3 烧成与使用前烘烤（建议修改现工艺）</h3>
+  <div class="grid g2">
+    <div class="card">
+      <h4 class="sub2" style="margin-top:0">烧成（现为 800 ℃，建议提高）</h4>
+      <ul class="tight" style="font-size:14.8px;color:var(--ink2)">
+        <li>25–40 ℃/h 升至 600 ℃，<b>保温 4 h</b>；</li>
+        <li>50–60 ℃/h 升至 <b>1100–1200 ℃</b>；</li>
+        <li><b>保温 4–6 h</b>（使 Al(PO₃)₃ 充分转化为 AlPO₄ 并与 α-Al₂O₃ 反应生成复合结合相）；</li>
+        <li>随炉冷却至 600 ℃ 后出炉，<b>避免急冷</b>（急冷会在冷却段就直接制造裂纹）；</li>
+        <li>若窑炉条件只允许 800 ℃，则必须把保温时间延长到 8 h 以上，并把成品做防潮封孔处理，同时接受强度只有高温烧成 50–60% 的现实。</li>
+      </ul>
+      <div class="cal ok" style="margin-bottom:0"><b>这是性价比最高的一项改动</b>仅把烧成温度从 800 ℃ 提到 1200 ℃，按第 03 节模型：高温有效抗拉强度由 <b>1.6 MPa 提到 4.2 MPa（×2.6）</b>，判据①由 <b>S₁ = 0.09 升到 0.22</b>，使用中判据②由 <b>S₂ = 0.31 升到 0.82</b>；若同时把入钢前砖温提到 1400 ℃，则 <b>S₁ = 0.51、S₂ = 0.94</b>，基本进入“能扛住”的区间。这是全篇投入产出比最高的一项改动。</div>
+    </div>
+
+    <div class="card">
+      <h4 class="sub2" style="margin-top:0">使用前大火烘烤（分级 + 热态入钢）</h4>
+      <div class="tw" style="border:none">
+        <table style="min-width:auto">
+          <thead><tr><th>区间</th><th class="num">时间</th></tr></thead>
+          <tbody>
+            <tr><td>0 → 200 ℃</td><td class="num">2 h</td></tr>
+            <tr><td>200 → 350 ℃</td><td class="num">3 h</td></tr>
+            <tr><td>350 → 600 ℃</td><td class="num">4 h</td></tr>
+            <tr><td>600 → 800 ℃</td><td class="num">3 h</td></tr>
+            <tr><td>800 → 1100 ℃</td><td class="num">3 h</td></tr>
+            <tr><td>1100 → 1200 ℃</td><td class="num">4 h（大火）</td></tr>
+            <tr><td>转入盛钢</td><td class="num">保持 &gt; 1400 ℃</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:14.5px;color:var(--ink2)"><b>新包首次烘烤各段保温时间再延长 50%。</b>烘烤过程中监测砖体表面与钢包内衬温差，控制在 100 ℃ 以内。</p>
+      <div class="cal warn" style="margin-bottom:0"><b>不要冷却再入钢</b>若必须冷却（如运输、检修），重新升温时同样要按上表分级，且第一次入钢前需在 1400 ℃ 以上保温至少 1 h 均温。<b>冷态直接盛 1700 ℃ 钢水，是对该砖最致命的操作</b>——热应力会从 19 MPa 暴涨到 128 MPa（第 03 节）。</div>
+    </div>
+  </div>
+
+  <h3 class="sub">5.4 烘烤曲线对照：正确分级 vs 直冲大火</h3>
+  <div class="curvebox">
+    <svg id="curveSvg" viewBox="0 0 900 380" width="900" height="380" role="img"
+         aria-label="钢包弯头砖烘烤升温曲线：分级慢速烘烤曲线与直冲大火错误曲线的对比">
+      <text x="450" y="190" text-anchor="middle" font-size="14" fill="#6b7a90">正在绘制烘烤曲线…</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <span><i style="background:#0b5f8a"></i>推荐曲线：分级升温 + 各段保温，1100→1200 ℃ 大火 4 h</span>
+    <span><i style="background:#a52020"></i>错误曲线：中低温段直冲大火，6 h 冲到 600 ℃</span>
+    <span><i style="background:#fdf0ef;border:1px solid #f0c9c6"></i>危险区 200–700 ℃：残水蒸汽爆裂</span>
+  </div>
+  <p style="font-size:14px;color:var(--ink3)">红线的斜率就是“炸裂”的斜率：中低温段每一次“赶进度”，都会变成砖内部的一次憋压。</p>
+</section>
+
+<!-- ============ 06 试验验证 ============ -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>验证试验：用数据说话，而不是凭配方争论</h2>
+  <p>ZrO₂ 到底加不加、加多少，最省事的办法是做一组对照试验。建议投入约 20–30 块试样、一次窑期即可得出结论。</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>试样编号</th><th>A（基准）</th><th>B</th><th>C</th><th>D</th></tr></thead>
+      <tbody>
+        <tr><td>m-ZrO₂（5 μm）</td><td class="num">0</td><td class="num">2 %</td><td class="num"><b>4 %</b></td><td class="num">4 %（1–2 μm）</td></tr>
+        <tr><td>Cr₂O₃</td><td class="num">3 %</td><td class="num">3 %</td><td class="num">3 %</td><td class="num">2 %</td></tr>
+        <tr><td>聚丙烯纤维</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">0.08 %</td></tr>
+        <tr><td>烧成温度（第一阶段）</td><td class="num">800 ℃</td><td class="num">800 ℃</td><td class="num">800 ℃</td><td class="num">800 ℃</td></tr>
+        <tr><td>烧成温度（第二阶段）</td><td class="num">1200 ℃</td><td class="num">—</td><td class="num">1200 ℃</td><td class="num">1200 ℃</td></tr>
+        <tr><td colspan="5" style="background:#f7f9fc;font-size:13.5px;color:var(--ink2)">检测项：体积密度、显气孔率、常温抗折/抗压强度、1100 ℃ 水淬抗热震（循环 5/10 次后残余抗折强度比）、1200 ℃×4 h 后的强度保持率、吸湿率（40 ℃/95%RH×72 h 增重）、XRD 物相（AlPO₄ / ZrP₂O₇ 生成量）。<br>
+          <b>两阶段设计的意义：</b>第一阶段回答“ZrO₂ 有没有用、加多少合适”；第二阶段回答“提高烧成温度值不值”。按第 03 节模型，<b>第二阶段的收益预期远大于第一阶段</b>。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="sub2">三条判定线</h4>
+  <ol class="tight" style="font-size:15px;color:var(--ink2)">
+    <li><b>抗热震判据：</b>1100 ℃ ↔ 室温水淬，循环 5 次不开裂，且残余抗折强度比 ≥ 40%。</li>
+    <li><b>相容性判据：</b>XRD 中若出现明显 ZrP₂O₇ 衍射峰（说明磷酸盐被消耗），则 ZrO₂ 必须降量或改用预稳定处理（如表面包覆、或改用部分稳定 ZrO₂）。</li>
+    <li><b>工艺判据：</b>1200 ℃ 烧成组的强度若比 800 ℃ 组高出 50% 以上，则优先改烧成温度，而不是继续加添加剂。</li>
+  </ol>
+  <div class="cal info" style="margin-bottom:0"><b>顺带做的两个免费试验</b>① 称重法测残水：坯体干燥后与烘干至恒重对比，直接得到残水率，比任何经验判断都准。② 敲击听音 + 密度抽检：把密度偏低或声音发闷的砖挑出来，往往正是现场炸裂的那几块。</div>
+</section>
+
+<!-- ============ 07 速查 ============ -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>结论速查表</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>问题</th><th>回答</th><th class="num">作用量级</th></tr></thead>
+      <tbody>
+        <tr><td>加 4% 单斜 ZrO₂ 5 μm 是否有益？</td><td><b>抗裂：无益（R +2.1%，但 S₁ 反而 −3%）；抗损伤：有益（R′′′′ +13%）。</b>不是解决炸裂的关键。建议降到 <b>3%</b> 并改用 1–2 μm。</td><td class="num flat">★★☆☆☆</td></tr>
+        <tr><td>那什么才是关键？</td><td><b>残水控制 + 分级慢速烘干</b>（针对蒸汽爆裂，主因）；<b>烧成温度 800→1200 ℃</b>（针对高温强度，S₁ 0.09→0.22）；<b>烘烤后热态（≥1400 ℃）入钢</b>（针对入钢热震，ΔT<sub>表面</sub> 428→214 K）。</td><td class="num dn">★★★★★</td></tr>
+        <tr><td>3% Cr₂O₃ 有没有问题？</td><td>有代价，但主要不在膨胀上：按体积分数换算，2%↔3% 对 α 的影响仅约 0.1%，真正的问题是它<b>促烧结、提高模量、降低气孔率</b>，方向与抗热震相反。建议降至 2%（不承担抗渣任务可到 1–1.5%）。</td><td class="num">★★★☆☆</td></tr>
+        <tr><td>5 μm 粒径合适吗？</td><td>偏粗。Al₂O₃ 基体中 <b>1–2 μm 的增韧效率更高</b>；5 μm 更易成为缺陷源。可 1–2 μm 为主 + 少量粗粒做级配。</td><td class="num">★★☆☆☆</td></tr>
+        <tr><td>ZrO₂ 让导热系数掉 27%，要紧吗？</td><td><b>要紧，而且是负面的。</b>λ 降低 → 入钢时表面升温更快（ΔT<sub>表面</sub> +5.5%）→ 热应力更大。这正是 S₁ 反而下降的原因，也是本报告最重要的非直觉结论。</td><td class="num up">★★★★☆</td></tr>
+        <tr><td>还需要加什么？</td><td>1% 活性 α-Al₂O₃ 微粉强化基质；0.05–0.1% 聚丙烯纤维造排气通道；结合剂稀释至 ρ 1.35–1.40。</td><td class="num dn">★★★★☆</td></tr>
+        <tr><td>要不要考虑替代增韧剂？</td><td>可以对比：<b>2% 蓝晶石/硅线石微粉</b>（莫来石化膨胀补偿收缩）、<b>1–3% 熔融石英细粉</b>（低膨胀，直接降低 ΔT<sub>表面</sub> 与热应力，但会牺牲部分抗渣性）。若抗渣不是主要矛盾，它们对判据①的提升很可能优于 ZrO₂。</td><td class="num dn">★★★★☆</td></tr>
+        <tr><td>烘烤后能不能冷却？</td><td><b>尽量避免。</b>冷却会把 ΔT<sub>表面</sub> 从 428 K 拉到 999 K（冷砖 300 ℃ 入钢，热应力 19→128 MPa）。必须冷却时应缓慢（≤40 ℃/h），再次入钢前按分级曲线重新升温并均温至 ≥1400 ℃。</td><td class="num dn">★★★★★</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>附：本报告使用的计算模型与标定（供技术人员核对与质疑）</summary>
+    <ul class="tight" style="font-size:14.5px;color:var(--ink2)">
+      <li><b>复合规则：</b>致密矿相按 Reuss 等应力下限混合（对含气孔、含微裂纹的耐火材料，Reuss 下限比 Voigt 上限更接近实测）；再作气孔与晶界折减。</li>
+      <li><b>气孔折减公式：</b>α = α_s·(1 − 0.40(P − 0.16))；E₀ = E_s·(1−P)(1 − 1.9P + 0.9P²)·0.35；λ = λ_s·(1−P)^1.5·0.84；σ_f = σ₀(T)·exp(−4P)。</li>
+      <li><b>标定点（P = 16%、800 ℃ 烧成）：</b>α = 9.50×10⁻⁶/K、E₀ = 78 GPa、λ = 18.8 W/(m·K)、σ_f = 4.2 MPa。其中 E₀ 与 λ 取该类材料实测区间<b>偏上限</b>（对砖有利）的取值——即便取有利值，判据①仍不足 1。</li>
+      <li><b>σ₀(T) 零气孔抗拉强度：</b>800 ℃→8.0、1050 ℃→15.0、1100 ℃→17.0、1200 ℃→21.0、1300 ℃→24.0 MPa（线性插值）。</li>
+      <li><b>高温软化：</b>kT = exp(−(T − 20)/750)，下限 0.06；E = E₀·kT；σ_f,高温 = σ_f·kT^0.67。这一项是厚壁砖能在热态存活的关键——温度越高，磷酸盐结合相越软，模量越低，热应力越小。</li>
+      <li><b>入钢表面温升：</b>半无限体 + 对流边界解 ΔT_表面 = ΔT·[1 − exp(x²)·erfc(x)]，x = h√(a·t)/λ，h = 500 W/(m²·K)，t = 600 s（危险窗口代表值），erfc 用 Abramowitz & Stegun 7.1.26 数值实现。</li>
+      <li><b>判定①（入钢热震）：</b>σ = ½·E·α·ΔT_表面 × k_relax，k_relax = 0.5（部分约束 + 几何折减 + 蠕变松弛）；判据 S₁ = σ_f,高温 / σ。</li>
+      <li><b>判定②（使用稳态）：</b>ΔT_wall = qL/λ，q = 40 kW/m²；σ_wall 同式计算；判据 S₂ = σ_f,高温 / σ_wall。</li>
+      <li><b>R′′′′ 中的断裂功：</b>每 1% m-ZrO₂ 约贡献 4% 的 γ_wof 提升（用于相对比较，非绝对值）。</li>
+      <li><b>蒸汽压估算：</b>理想气体方程 + 一维扩散时间尺度，用于比较不同升温速率的相对风险，不是绝对压力预测。</li>
+      <li><b>本报告的边界：</b>这是一个用于“比较工艺与配比方向”的工程模型，绝对数值有 ±1 个数量级的不确定性；结论（哪一项有效、哪一项无效、量级差多少）比数值本身更可靠。投产前请以第 06 节的对照试验数据为准。</li>
+    </ul>
+  </details>
+</section>
+
+
+<div class="share-card">
+  <h3>把这个链接转发到微信</h3>
+  <p class="sub">电脑上打开本页后复制下方网址；手机上用微信扫右侧二维码即可打开与转发。</p>
+  <div class="share-flex">
+    <img class="qr" alt="扫码在手机上打开本报告"
+         src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=https%3A%2F%2Fuyfhowuhieiw.github.io%2Frefractory-elbow-a7k2m9%2F">
+    <div class="share-meta">
+      <div class="url-box">https://uyfhowuhieiw.github.io/refractory-elbow-a7k2m9/</div>
+      <ol>
+        <li>本页为手机优先排版，微信内置浏览器可直接打开。</li>
+        <li>页面含可拖动的计算器，手指拖动滑块即可看到结论变化。</li>
+        <li>链接长期有效，内容更新后网址不变。</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <p><b>钢包出钢直角弯头砖 — 炸裂失效诊断与 4% 单斜氧化锆抗热震评估</b><br>
+  分析对象：磷酸二氢铝结合白刚玉–铬刚玉体系直角弯头砖（内孔 φ120 mm、壁厚 80 mm、外形四方体、机压成型、800 ℃ 中温烧成）。<br>
+  本页所有数值为基于材料参数与简化模型的工程估算，用于工艺比较与方向判断，不替代实物试验数据。<br>手机分享版 · 建议用微信打开后转发给同事。</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var clamp = function(v,a,b){ return Math.min(b, Math.max(a, v)); };
+
+  /* ============ 模型标定说明（与正文 3.3 节及附录一致）============
+     ① 致密矿相 α/E/λ 取文献值（下表 MAT）；
+     ② 气孔率影响：α = α_s·(1 − 0.40(P−0.16))；E₀ = E_s·(1−P)(1−1.9P+0.9P²)·0.35；
+        λ = λ_s·(1−P)^1.5·0.84；σ_f = σ₀(T)·exp(−4P)；
+     ③ 标定结果（P = 16%、800 ℃ 烧成）：α ≈ 9.50×10⁻⁶/K、E₀ ≈ 78 GPa、
+        λ ≈ 18.8 W/(m·K)、σ_f ≈ 4.2 MPa —— E₀ 与 λ 均取该类铬刚玉–磷酸盐
+        结合耐火材料实测区间的偏上限值（对砖有利）；
+     ④ 高温软化：kT = exp(−(T−20)/750)，E = E₀·kT，σ_f,高温 = σ_f·kT^0.67；
+     ⑤ 两个判据：① 入钢瞬时表层热震（σ = ½EαΔT_表面·0.5）；② 使用中稳态壁内
+        温差应力（ΔT = qL/λ）。                                             */
+  var MAT = {
+    Al2O3: { a: 9.5e-6,  E: 380, lam: 30.0, rho: 3.95 },
+    Cr2O3: { a: 9.6e-6,  E: 280, lam: 12.0, rho: 5.21 },
+    ZrO2 : { a: 10.5e-6, E: 200, lam: 2.0,  rho: 5.68 }
+  };
+
+  /* 零气孔抗拉强度 σ0(T)，MPa（由 800 ℃ 烧成、P=16% 时 σ_f≈4.2 MPa 反推标定） */
+  function sigma0(T){
+    var pts = [[800,8.0],[1050,15.0],[1100,17.0],[1200,21.0],[1300,24.0]];
+    if (T <= pts[0][0]) return pts[0][1];
+    for (var i=1;i<pts.length;i++){
+      if (T <= pts[i][0]){
+        var t0=pts[i-1][0], t1=pts[i][0], s0=pts[i-1][1], s1=pts[i][1];
+        return s0 + (s1-s0)*(T-t0)/(t1-t0);
+      }
+    }
+    return pts[pts.length-1][1];
+  }
+
+  var NU = 0.22;
+  var T_STEEL = 1700;
+  /* 表面温度骤升模型（半无限体 + 对流边界，Gurney–Lurie 近似） */
+  var H_CONV = 500;    /* W/(m²·K)，钢水直接接触（无强制冲刷） */
+  var L_CHAR = 0.040;  /* m，特征尺寸 = 半壁厚 */
+
+  function compute(zr, cr, porosity, Tfire, Tbrick){
+    /* ---- 质量份归一化（ZrO2 为外加，Cr2O3 可调，其余为白刚玉） ---- */
+    var mZr = zr, mCr = cr, mAl = 100 - mCr;
+    var tot = mAl + mCr + mZr;
+    var wAl = mAl/tot, wCr = mCr/tot, wZr = mZr/tot;
+
+    /* ---- 体积分数（含 16% 基准气孔） ---- */
+    var P0 = 0.16;
+    var vAl = wAl/MAT.Al2O3.rho, vCr = wCr/MAT.Cr2O3.rho, vZr = wZr/MAT.ZrO2.rho;
+    var vSum = vAl+vCr+vZr;
+    var fAl = vAl/vSum, fCr = vCr/vSum, fZr = vZr/vSum;
+
+    /* ---- Reuss 等应力下限（固相骨架） ---- */
+    var aS = fAl*MAT.Al2O3.a + fCr*MAT.Cr2O3.a + fZr*MAT.ZrO2.a;
+    var ES = 1/(fAl/MAT.Al2O3.E + fCr/MAT.Cr2O3.E + fZr/MAT.ZrO2.E);
+    var LS = 1/(fAl/MAT.Al2O3.lam + fCr/MAT.Cr2O3.lam + fZr/MAT.ZrO2.lam);
+
+    /* ---- 气孔率影响（含晶界弱化与微裂纹折减） ---- */
+    var P    = porosity/100;
+    var a    = aS*(1 - 0.40*(P - P0));                 /* 气孔使宏观 α 略降 */
+    var E0   = ES*(1-P)*(1 - 1.9*P + 0.9*P*P)*0.35;    /* 常温有效模量 */
+    var lam  = LS*Math.pow(1-P, 1.5)*(1-P0);           /* 导热系数 */
+    var sf   = sigma0(Tfire)*Math.exp(-4*P);           /* 常温抗拉强度 */
+
+    /* 高温软化/蠕变松弛折算：磷酸盐结合相 >1000 ℃ 急剧软化，
+       有效模量在 1100 ℃ 降至常温的 1/3、1400 ℃ 降至约 1/10，
+       这正是厚壁砖在热态下能够不裂的根本原因 */
+    var kT = clamp(Math.exp(-(Tbrick - 20)/750), 0.06, 1.0);
+    var E  = E0*kT;
+
+    /* ---- 热震阻力参数 R = σ_f(1−ν)/(E·α)：材料固有临界温差（经典判据） ---- */
+    var R = sf*(1-NU)/(E0*a);
+
+    /* ---- 抗热震损伤参数 R'''' ∝ E·γ_wof/σ_f²（相对量） ---- */
+    var gwof = 1 + 0.04*zr;
+    var R4 = E0*gwof/(sf*sf*(1-NU));
+
+    /* ---- 入钢时通道表面温度骤升（半无限体 + 对流边界，t = 10 min 危险窗口） ---- */
+    var bi = H_CONV*L_CHAR/lam;
+    var alph = lam/(3280*1100);                      /* 热扩散率 m²/s */
+    var th = 600;                                    /* s */
+    var Fo = alph*th/(L_CHAR*L_CHAR);
+    var x = H_CONV*Math.sqrt(alph*th)/lam;           /* 表面温度解的相似变量 */
+    var dtSurface = 0;
+    if (Tbrick < T_STEEL){
+      dtSurface = (T_STEEL-Tbrick)*(1 - Math.exp(x*x)*erfc(x));
+    }
+
+    /* ---- 判定 ①：入钢瞬时通道表面的热震应力
+       σ = ½·E·α·ΔT_表面 × k_relax，k_relax = 0.5 计入部分约束、
+       几何折减与高温蠕变松弛（E 换算为 MPa） ---- */
+    var K_RELAX = 0.5;
+    var sig = K_RELAX*0.5*(E*1000)*a*dtSurface;      /* MPa */
+    var sfHot = sf*Math.pow(kT, 0.67);               /* 高温有效抗拉强度 MPa */
+    var S = sig > 0.01 ? sfHot/sig : 99;             /* 判据①：σ_f,高温 / σ_热 */
+
+    /* ---- 判定 ②：使用中厚壁稳态内外温差应力（一维稳态，ΔT = qL/λ） ---- */
+    var Q_SERVICE = 40000;                           /* W/m²，1700 ℃ 通道面的热流密度代表值 */
+    var dTWall = Q_SERVICE*L_CHAR/lam;               /* K */
+    var sigWall = K_RELAX*0.5*(E*1000)*a*dTWall;     /* MPa */
+    var Sw = sigWall > 0.01 ? sfHot/sigWall : 99;
+
+    return { a:a, E:E, E0:E0, lam:lam, sf:sf, sfHot:sfHot, kT:kT, R:R, R4:R4, S:S,
+             bi:bi, Fo:Fo, dT:(T_STEEL-Tbrick), dtS:dtSurface, sig:sig, P:P,
+             sigWall:sigWall, Sw:Sw, dTWall:dTWall };
+  }
+
+  /* 互补误差函数 erfc（Abramowitz & Stegun 7.1.26，|ε| < 1.5×10⁻⁷） */
+  function erf(z){
+    var s = z < 0 ? -1 : 1;
+    var v = Math.abs(z);
+    var t = 1/(1 + 0.3275911*v);
+    var y = 1 - (((((1.061405429*t - 1.453152027)*t) + 1.421413741)*t - 0.284496736)*t + 0.254829592)*t*Math.exp(-v*v);
+    return s*y;
+  }
+  function erfc(z){ return 1 - erf(z); }
+
+  /* 同工艺、无锆配方：用于隔离“ZrO₂ 自身的净贡献” */
+  function refOf(zr, cr, po, tf, ti){ return compute(0, cr, po, tf, ti); }
+  /* 固定基准：现配方 0% ZrO2 / 3% Cr2O3 / 16% 气孔 / 800 ℃ 烧成 / 1100 ℃ 入钢 */
+  var REF = compute(0, 3, 16, 800, 1100);
+
+  /* ---------- 状态 ---------- */
+  var st = { zr:4, cr:3, po:16, tf:800, ti:1100 };
+
+  function pctBadge(cur, ref, higherBetter){
+    if (!ref) return '';
+    var p = (cur-ref)/ref*100;
+    var good = higherBetter ? p>=0 : p<=0;
+    var s = (p>=0?'+':'') + p.toFixed(1) + '%';
+    return '<span class="'+(good?'dn':'up')+'">'+s+'</span>';
+  }
+
+  function render(){
+    var d    = compute(st.zr, st.cr, st.po, st.tf, st.ti);
+    var same = refOf(st.zr, st.cr, st.po, st.tf, st.ti);   /* 同工艺、无锆 */
+
+    /* 滑块读数 */
+    $('vZr').textContent = st.zr.toFixed(1);
+    $('vCr').textContent = st.cr.toFixed(1);
+    $('vPo').textContent = st.po;
+    $('vTs').textContent = st.tf;
+    $('vTi').textContent = st.ti;
+
+    /* 物性 */
+    $('oA').textContent  = (d.a*1e6).toFixed(2);
+    $('oL').textContent  = d.lam.toFixed(2);
+    $('oE').textContent  = d.E.toFixed(1);
+    $('oSf').textContent = d.sfHot.toFixed(2);
+    $('oR').textContent  = d.R.toFixed(0);
+    $('oR4').textContent = (d.R4/same.R4).toFixed(2);
+    $('oSig').textContent = d.sig.toFixed(0);
+    $('oS').textContent  = d.S.toFixed(2);
+    $('oSw').textContent = d.Sw.toFixed(2);
+
+    /* 相对「同工艺无锆」的变化徽标 */
+    $('dA').innerHTML  = pctBadge(d.a,   same.a,   false);
+    $('dL').innerHTML  = pctBadge(d.lam, same.lam, true);
+    $('dE').innerHTML  = pctBadge(d.E,   same.E,   false);
+    $('dR').innerHTML  = pctBadge(d.R,   same.R,   true);
+    $('dR4').innerHTML = '';
+    $('dS').innerHTML  = pctBadge(d.S,   same.S,   true);
+    if (st.zr === 0){ $('dA').innerHTML=''; $('dL').innerHTML=''; $('dE').innerHTML=''; $('dR').innerHTML=''; $('dS').innerHTML=''; }
+
+    /* 条形宽度 */
+    function w(v, max){ return clamp(v/max*100, 2, 100) + '%'; }
+    $('fA').style.width  = w(d.a*1e6, 12);
+    $('fL').style.width  = w(d.lam, 22);
+    $('fE').style.width  = w(d.E0, 45);
+    $('fSf').style.width = w(d.sfHot, 14);
+    $('fR').style.width  = w(d.R, 700);
+    $('fR4').style.width = w(d.R4/same.R4, 2);
+    $('fSig').style.width = w(d.sig, 60);
+    $('fS').style.width  = w(d.S, 6);
+    $('fSw').style.width = w(d.Sw, 8);
+
+    /* ---------- 判据文案 ---------- */
+    var fire  = compute(st.zr, st.cr, st.po, 1200, st.ti);
+    var both  = compute(st.zr, st.cr, st.po, 1200, 1400);
+    var hot   = compute(st.zr, st.cr, st.po, st.tf, 1400);
+    var msg = '';
+
+    if (d.S < 1){
+      msg += '<b>判据 ①：入钢瞬间会起裂（S = '+d.S.toFixed(2)+' &lt; 1）</b>' +
+             '通道表面在头 10 min 内温度骤升约 '+d.dtS.toFixed(0)+' K，' +
+             '表层热应力 '+d.sig.toFixed(0)+' MPa，而该温度下的有效抗拉强度只有 '+d.sfHot.toFixed(2)+
+             ' MPa。裂纹从通道内壁起、向砖体内部剥落，反复使用即逐层掉块。';
+      if (st.ti < 1400) msg += '<br><br><b>① 最有效的一招：提高入钢前的砖温。</b>' +
+             '把砖温从 '+st.ti+' ℃ 提到 1400 ℃，ΔT<sub>表面</sub> 由 '+d.dtS.toFixed(0)+' K 降到 '+
+             hot.dtS.toFixed(0)+' K，安全系数提升约 '+((hot.S/d.S-1)*100).toFixed(0)+'%。' +
+             '（砖温越高，表面与钢水的温差越小，这是唯一能大幅改变判据①的手段。）';
+      if (st.tf < 1050) msg += '<br><br><b>② 提高烧成温度到 1200 ℃。</b>高温有效抗拉强度可由 '+d.sfHot.toFixed(2)+
+             ' MPa 提高到 '+fire.sfHot.toFixed(2)+' MPa（+'+((fire.sfHot/d.sfHot-1)*100).toFixed(0)+
+             '%），R 提高约 '+((fire.R/d.R-1)*100).toFixed(0)+'%。' +
+             '若与热态入钢同时实施，判据①可达到 S = '+both.S.toFixed(2)+'。';
+    } else if (d.S < 2){
+      msg += '<b>判据 ①：边际合格（S = '+d.S.toFixed(2)+'）</b>' +
+             '表层温升 ≈ '+d.dtS.toFixed(0)+' K，热应力 '+d.sig.toFixed(0)+' MPa，有效抗拉强度 '+d.sfHot.toFixed(2)+
+             ' MPa，裕度不大。钢流偏冲内角、砖体密度不均或局部超温都可能突破。' +
+             '建议再做一步：烧成提到 1200 ℃（S → '+fire.S.toFixed(2)+'）。';
+    } else {
+      msg += '<b>判据 ①：合格（S = '+d.S.toFixed(2)+'）</b>' +
+             '表层温升 ≈ '+d.dtS.toFixed(0)+' K，热应力约 '+d.sig.toFixed(0)+' MPa，有效抗拉强度 '+d.sfHot.toFixed(2)+
+             ' MPa，热震已不是主要矛盾。限制环节转到<b>残水蒸汽爆裂</b>（第 01 节），请重点检查干燥曲线。';
+    }
+
+    msg += '<br><br><b>判据 ②（使用中稳态）：' + (d.Sw >= 1 ? '安全' : '不足') + '（S = '+d.Sw.toFixed(2)+'）</b>' +
+           '按热流密度 40 kW/m² 计，壁厚方向稳态温差 ΔT = qL/λ ≈ '+d.dTWall.toFixed(0)+' K，' +
+           '壁内应力约 '+d.sigWall.toFixed(0)+' MPa，有效抗拉强度约 '+d.sfHot.toFixed(2)+
+           ' MPa。' + (d.Sw >= 1
+             ? '说明<b>一旦砖被充分预热并稳定运行，厚壁本身的温度梯度是可以承受的</b>——失效集中在“冷砖遇钢”的瞬间和水分排出阶段。'
+             : '说明壁厚方向的稳态温差已超限，需要降低热流、减薄壁厚，或提高导热与高温强度。');
+
+    if (st.zr > 0){
+      msg += '<br><br><b>ZrO₂ 净贡献（与同工艺无锆配方对比）：</b>R ' + pctBadge(d.R, same.R, true) +
+             '、R′′′′ ' + pctBadge(d.R4, same.R4, true) + '、σ_f ' + pctBadge(d.sf, same.sf, true) +
+             '；但 λ ' + pctBadge(d.lam, same.lam, true) + '（表面升温更快，' + pctBadge(d.dtS, same.dtS, false) +
+             '）、α ' + pctBadge(d.a, same.a, false) + '。<b>净效果接近中性</b>，属辅助手段。';
+    }
+    $('verdictBox').innerHTML = msg;
+  }
+
+  /* ---------- 事件绑定 ---------- */
+  function isPreset(){ return st.zr===4 && st.cr===3 && st.po===16 && st.tf===800 && st.ti===1100; }
+  function syncBtns(){
+    $('btnA').classList.toggle('on', st.zr===0 && st.cr===3 && st.po===16 && st.tf===800 && st.ti===1100);
+    $('btnB').classList.toggle('on', isPreset());
+  }
+  function bind(id, key, isInt){
+    var el = $(id);
+    if (!el) return;
+    el.addEventListener('input', function(){
+      st[key] = isInt ? parseInt(el.value,10) : parseFloat(el.value);
+      syncBtns(); render();
+    });
+  }
+  bind('sZr','zr'); bind('sCr','cr'); bind('sPo','po',true); bind('sTs','tf',true); bind('sTi','ti',true);
+
+  function preset(zr){
+    st.zr=zr; st.cr=3; st.po=16; st.tf=800; st.ti=1100;
+    $('sZr').value=zr; $('sCr').value=3; $('sPo').value=16; $('sTs').value=800; $('sTi').value=1100;
+    syncBtns(); render();
+  }
+  $('btnA').addEventListener('click', function(){ preset(0); });
+  $('btnB').addEventListener('click', function(){ preset(4); });
+
+  /* ---------- 烘烤曲线 SVG ---------- */
+  var SCHED = [
+    {t:0,   T:25,  lab:'装窑'},
+    {t:2,   T:200, lab:'200 ℃ / 2 h'},
+    {t:5,   T:350, lab:'350 ℃ / 3 h'},
+    {t:9,   T:600, lab:'600 ℃ / 4 h'},
+    {t:12,  T:800, lab:'800 ℃ / 3 h'},
+    {t:15,  T:1100,lab:'1100 ℃ / 3 h'},
+    {t:19,  T:1200,lab:'1200 ℃ / 4 h 大火'},
+    {t:21,  T:1150,lab:'热态入钢 ≥1400 ℃'}
+  ];
+  var DANGER = [
+    {t:0, T:25}, {t:6, T:600}, {t:8, T:800}, {t:10, T:1100}, {t:14, T:1200}, {t:16, T:1700}
+  ];
+
+  function drawCurve(){
+    var W=900, H=380, L=64, Rr=26, Tm=30, B=46;
+    var pw = W-L-Rr, ph = H-Tm-B;
+    var tMax = 22, TMax = 1800;
+    var x = function(t){ return L + t/tMax*pw; };
+    var y = function(T){ return Tm + ph - clamp(T,0,TMax)/TMax*ph; };
+
+    var s = [];
+    s.push('<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fff"/>');
+
+    /* 危险区 200-700 ℃ 阴影 */
+    s.push('<rect x="'+L+'" y="'+y(700)+'" width="'+pw+'" height="'+(y(200)-y(700))+'" fill="#fdf0ef"/>');
+    s.push('<text x="'+(L+8)+'" y="'+(y(700)-6)+'" font-size="11" fill="#a52020" font-family="monospace">危险区：残水蒸汽爆裂 200–700 ℃</text>');
+
+    /* 网格 */
+    for (var T=0; T<=TMax; T+=200){
+      s.push('<line x1="'+L+'" y1="'+y(T)+'" x2="'+(L+pw)+'" y2="'+y(T)+'" stroke="'+(T%400===0?'#dfe5ee':'#eef2f7')+'" stroke-width="1"/>');
+      s.push('<text x="'+(L-9)+'" y="'+(y(T)+4)+'" font-size="11" fill="#6b7a90" text-anchor="end" font-family="monospace">'+T+'</text>');
+    }
+    for (var t=0; t<=tMax; t+=2){
+      s.push('<line x1="'+x(t)+'" y1="'+Tm+'" x2="'+x(t)+'" y2="'+(Tm+ph)+'" stroke="#f2f5f9" stroke-width="1"/>');
+      s.push('<text x="'+x(t)+'" y="'+(Tm+ph+18)+'" font-size="11" fill="#6b7a90" text-anchor="middle" font-family="monospace">'+t+'</text>');
+    }
+    s.push('<text x="'+(L+pw/2)+'" y="'+(H-6)+'" font-size="12" fill="#3d4a5c" text-anchor="middle">累计时间 (h)</text>');
+    s.push('<text x="16" y="'+(Tm+ph/2)+'" font-size="12" fill="#3d4a5c" text-anchor="middle" transform="rotate(-90 16 '+(Tm+ph/2)+')">温度 (℃)</text>');
+
+    /* 错误曲线（大火直冲） */
+    var dErr = DANGER.map(function(p,i){ return (i?'L':'M')+x(p.t)+' '+y(p.T); }).join(' ');
+    s.push('<path d="'+dErr+'" fill="none" stroke="#a52020" stroke-width="2.4" stroke-dasharray="7 5"/>');
+    s.push('<text x="'+x(7.4)+'" y="'+y(760)+'" font-size="11.5" fill="#a52020" font-family="monospace">直冲大火：6 h 冲到 600 ℃ → 炸裂</text>');
+
+    /* 正确曲线 + 保温平台 */
+    var dOk = SCHED.map(function(p,i){ return (i?'L':'M')+x(p.t)+' '+y(p.T); }).join(' ');
+    s.push('<path d="'+dOk+'" fill="none" stroke="#0b5f8a" stroke-width="3" stroke-linejoin="round"/>');
+
+    /* 保温平台阴影 */
+    [[2,5,200],[5,9,350],[9,12,600],[12,15,800],[15,19,1100],[19,21,1200]].forEach(function(seg){
+      s.push('<rect x="'+x(seg[0])+'" y="'+y(seg[2])+'" width="'+(x(seg[1])-x(seg[0]))+'" height="3" fill="#0e7fa8" opacity="0.55"/>');
+    });
+
+    /* 节点 */
+    SCHED.forEach(function(p,i){
+      s.push('<circle cx="'+x(p.t)+'" cy="'+y(p.T)+'" r="4.2" fill="#fff" stroke="#0b5f8a" stroke-width="2.4"/>');
+      if (i>0 && i<SCHED.length-1){
+        s.push('<text x="'+x(p.t)+'" y="'+(y(p.T)-11)+'" font-size="10.5" fill="#0b5f8a" text-anchor="middle" font-family="monospace">'+p.T+'</text>');
+      }
+    });
+    s.push('<text x="'+x(20)+'" y="'+y(1150)+'" font-size="11" fill="#1c6b45" text-anchor="end" font-family="monospace">热态入钢，不冷却</text>');
+
+    /* 钢水线 */
+    s.push('<line x1="'+L+'" y1="'+y(1700)+'" x2="'+(L+pw)+'" y2="'+y(1700)+'" stroke="#b45309" stroke-width="1.6" stroke-dasharray="4 4"/>');
+    s.push('<text x="'+(L+pw-4)+'" y="'+(y(1700)-6)+'" font-size="11" fill="#b45309" text-anchor="end" font-family="monospace">钢水 1700 ℃</text>');
+
+    $('curveSvg').innerHTML = s.join('');
+  }
+
+  drawCurve();
+  render();
+})();
+</script>
+
+</body>
+</html>
